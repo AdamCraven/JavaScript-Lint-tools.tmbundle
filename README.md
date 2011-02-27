@@ -41,7 +41,7 @@ To run either, without saving, press;
 And select from the menu which lint you wish to run.
 
 ## Troubleshooting
-If you get an error similar to on running;
+If you get an error whilst first running the bundle, similar to;
 
 	/bin/bash/: node: command not found
 
