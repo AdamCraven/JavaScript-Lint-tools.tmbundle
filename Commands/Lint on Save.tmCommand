@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>saveActiveFile</string>
 	<key>command</key>
-	<string>"${TM_NODE:node}" "$TM_BUNDLE_SUPPORT"/bin/runlint.js "$TM_FILEPATH"
+	<string>"${TM_NODE:-node}" "$TM_BUNDLE_SUPPORT"/bin/runlint.js "$TM_FILEPATH"
 </string>
 	<key>input</key>
 	<string>document</string>
