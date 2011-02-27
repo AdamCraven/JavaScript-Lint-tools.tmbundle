@@ -3,7 +3,7 @@
 Supports [jshint][jshint] and [jslint][jslint]
 
 ## Philosophy
-Easy configuration, fast (multi-thousand line files in less than 100ms) and lint on every save.
+Easy configuration, fast (even with multi-thousand line files) and lint on every save.
 
 ## Requirements
 * **[node.js] [nodejs]** Version 0.4.1 or higher. May work with previous versions.
