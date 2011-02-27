@@ -49,13 +49,15 @@ Check that node is installed properly by accessing it from the command line. If 
 
 To get around this you can create a symlink to node;
 
-	ln -s /path/to/your/node /usr/bin
+	ln -s /path/to/your/node /usr/bin/node
 	
 Or create a shell variable in the advanced textmate options;
 
 	TM_NODE	/path/to/your/node
 
 If nothing is happening when saving, check you've put the /\*jshint\*/ line at the firstline (with no spaces) and JavaScript is selected as the language in textmate.
+
+If node is generating errors, check you're using 0.4.1 or higher.
 
 [jslint]: http://www.jslint.com/
 [jshint]: http://jshint.org/
