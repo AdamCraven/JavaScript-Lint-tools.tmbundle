@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>JavaScriptLintTools</string>
+	<string>JavaScript Lint Tools</string>
 	<key>ordering</key>
 	<array>
 		<string>E075A6C1-AD6D-46FC-AB54-8427E331E79C</string>
