@@ -5,6 +5,8 @@ Supports [jshint][jshint] and [jslint][jslint]
 ## Philosophy
 Easy configuration, fast (even with multi-thousand line files) and lint on every save.
 
+![Screenshot](http://adamcraven.me/img/javascript-lint-tools.png)
+
 ## Requirements
 * **[node.js] [nodejs]** Version 0.4.1 or higher. May work with previous versions.
 
