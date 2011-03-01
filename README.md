@@ -32,14 +32,14 @@ An example of a reasonable and basic setup would be;
 	
 Once setup, it's a matter of pressing;
 
-	cmd + s 
+	⌘S
 for the results to be shown in a tooltip.
 
 ### Validate with jslint or jshint
 
 To run either, without saving, press;
 
-	ctrl + shift + v 
+	⌃⇧V
 And select from the menu which lint you wish to run.
 
 ## Troubleshooting
