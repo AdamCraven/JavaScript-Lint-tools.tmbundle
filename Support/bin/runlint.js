@@ -39,9 +39,9 @@
         var result, lint, lintErrs, i;
             
         if(lintVersion === "jshint") {
-            lint = require("../lib/jshint_export.js").JSHINT;
+            lint = require("../lib/jshint.js").JSHINT;
         } else {
-            lint = require("../lib/jslint_export.js").JSLINT;
+            lint = require("../lib/fulljslint-2010-12-14.js").JSLINT;
         }
 
         lint(fileContents);

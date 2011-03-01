@@ -1,5 +1,5 @@
 // jslint.js
-// 2010-12-23
+// 2010-12-14
 
 /*
 Copyright (c) 2002 Douglas Crockford  (www.JSLint.com)
@@ -2224,17 +2224,6 @@ loop:   for (;;) {
         }
     }
 
-    function step_in() {
-        var old_indent = indent;
-        if (prevtoken.line !== token.line &&
-                indent + option.indent === token.from) {
-            indent = token.from;
-        }
-        return function step_out() {
-            return (indent = old_indent);
-        };
-    }
-
     function indentation(bias) {
         var i;
         if (option.white && nexttoken.id !== '(end)') {
@@ -2737,8 +2726,7 @@ loop:   for (;;) {
                 while (!f && nexttoken.from > indent) {
                     indent += option.indent;
                 }
-                if (!f && !use_strict() && !m && option.strict &&
-                        funct['(context)']['(global)']) {
+                if (!use_strict() && !m && !f && option.strict) {
                     warning("Missing \"use strict\" statement.");
                 }
                 a = statements();
@@ -4664,7 +4652,7 @@ loop:   for (;;) {
     }, 160, true);
 
     prefix('[', function () {
-        var step_out = step_in(), b = token.line !== nexttoken.line;
+        var b = token.line !== nexttoken.line;
         this.first = [];
         if (b) {
             indent += option.indent;
@@ -4699,7 +4687,6 @@ loop:   for (;;) {
             indentation();
         }
         advance(']', this);
-        step_out();
         return this;
     }, 160);
 
@@ -4779,7 +4766,7 @@ loop:   for (;;) {
 
     (function (x) {
         x.nud = function () {
-            var step_out = step_in(), b, f, i, j, p, seen = {}, t;
+            var b, f, i, j, p, seen = {}, t;
             b = token.line !== nexttoken.line;
             if (b) {
                 indent += option.indent;
@@ -4858,7 +4845,6 @@ loop:   for (;;) {
                 indentation();
             }
             advance('}', this);
-            step_out();
             return this;
         };
         x.fud = function () {
@@ -4872,14 +4858,14 @@ loop:   for (;;) {
 // JavaScript does not have block scope. It only has function scope. So,
 // declaring a variable in a block can have unexpected consequences.
 
-        var id, name, value, v = token;
+        var id, name, value;
 
         if (funct['(onevar)'] && option.onevar) {
             warning("Too many var statements.");
         } else if (!funct['(global)']) {
             funct['(onevar)'] = true;
         }
-        v.first = [];
+        this.first = [];
         for (;;) {
             nonadjacent(token, nexttoken);
             id = identifier();
@@ -4891,7 +4877,7 @@ loop:   for (;;) {
                 break;
             }
             name = token;
-            v.first.push(token);
+            this.first.push(token);
             if (nexttoken.id === '=') {
                 nonadjacent(token, nexttoken);
                 advance('=');
@@ -4911,7 +4897,7 @@ loop:   for (;;) {
             }
             comma();
         }
-        return v;
+        return this;
     };
 
 
@@ -4936,7 +4922,7 @@ loop:   for (;;) {
     });
 
     prefix('function', function () {
-        var step_out = step_in(), i = optionalidentifier();
+        var i = optionalidentifier();
         if (i) {
             adjacent(token, nexttoken);
         } else {
@@ -4946,7 +4932,6 @@ loop:   for (;;) {
         if (funct['(loopage)']) {
             warning("Don't make functions within a loop.");
         }
-        step_out();
         return this;
     });
 
@@ -5698,6 +5683,7 @@ loop:   for (;;) {
             }
         }
 
+
         if (data.errors || data.implieds || data.unused) {
             err = true;
             o.push('<div id=errors><i>Error:</i>');
@@ -5806,7 +5792,7 @@ loop:   for (;;) {
     };
     itself.jslint = itself;
 
-    itself.edition = '2010-12-23';
+    itself.edition = '2010-12-14';
 
     return itself;
 
