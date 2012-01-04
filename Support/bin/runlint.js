@@ -31,47 +31,54 @@
         
         return utils.puts('ok');
     }
-                
-    function lintFile(err, fileContents) {
-        if (err) {
-            return utils.puts(err);
-        }
-        
-        var lint;
-        
-        if(lintVersion === "jshint") {
-            lint = require(jshintPath).JSHINT;
-        } else {
-            lint = require(jslintPath).JSLINT;
-        }
-        
-        lint(fileContents);
-        
-        return showOuput(lint);
-    }
-    
-    function onData(chunk) {  
-        var firstLine = chunk.match(/^\/\*(js(l|h)int)/); // Matches '/*jslint' or '/*jshint' on firstline
-
-        if (firstLine && typeof firstLine[1] !== "undefined") {
-            lintVersion = firstLine[1];  
-            process.stdin.pause();    
-        } else {
-            process.exit(1); // No matches, don't lint the file
-        }
-    }
     
     function runLint() {
-        if (!lintVersion) {
-            // If no version was specified check the firstline of the file
-            process.stdin.resume();
-            process.stdin.setEncoding('utf8');
-            process.stdin.on('data', onData);
+        
+        function lintFile(err, fileContents) {
+            if (err) { return utils.puts(err); }
+
+            var lint;
+
+            if(lintVersion === "jshint") {
+                lint = require(jshintPath).JSHINT;
+            } else {
+                lint = require(jslintPath).JSLINT;
+            }
+
+            lint(fileContents);
+
+            return showOuput(lint);
         }
-    
+        
         fs.readFile(filePath, 'utf8', lintFile); // Opens file
     }
     
-    runLint();
+    
+    function getLintVersion() {
+        
+        function checkFirstLine(chunk) {  
+            // Matches '/*jslint' or '/*jshint' on firstline
+            var firstLine = chunk.match(/^\/\*(js(l|h)int)/);
+
+            if (firstLine && typeof firstLine[1] !== "undefined") {
+                lintVersion = firstLine[1];  
+                process.stdin.pause();
+                
+                return runLint();
+            } else {
+                return process.exit(1);
+            }  
+        }
+        
+        process.stdin.resume();
+        process.stdin.setEncoding('utf8');
+        process.stdin.on('data', checkFirstLine);
+    }
+    
+    if (lintVersion) {
+        runLint();
+    } else {
+        getLintVersion();
+    }
 
 }());
