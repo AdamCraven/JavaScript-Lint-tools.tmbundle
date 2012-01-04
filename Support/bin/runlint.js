@@ -1,4 +1,4 @@
-/*jslint*/
+/*jshint*/
 (function () {
     /**
      * Lints a JavaScript file
