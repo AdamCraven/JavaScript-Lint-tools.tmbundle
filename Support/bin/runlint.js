@@ -13,7 +13,7 @@
     var utils = require('util');
     var filePath = process.argv[2];
     var lintVersion = process.argv[3] || null;
-    var jslintPath = "../lib/fulljslint.js";
+    var jslintPath = "../lib/jslint.js";
     var jshintPath = "../lib/jshint.js";
     
     function showOuput(lintResults) {
