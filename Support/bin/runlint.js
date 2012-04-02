@@ -1,5 +1,7 @@
 /*jshint*/
+/*global process, require*/
 (function () {
+    "use strict";
     /**
      * Lints a JavaScript file
      *
