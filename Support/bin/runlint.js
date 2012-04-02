@@ -19,19 +19,32 @@
     var jshintPath = "../lib/jshint.js";
     
     function showOuput(lintResults) {
-        if (lintResults.errors.length) {
-            var lintErrs = lintResults.errors;
+        var hasLintErrors = lintResults.errors.length > 0;
+        var unusedVars = lintResults.data().unused;
+        var i, len, lintErrs;
+        
+        if (!unusedVars && !hasLintErrors) {
+            return utils.puts('ok');
+        }
+        
+        if (hasLintErrors) {
+            lintErrs = lintResults.errors;
             
-            for (var i = 0, len = lintErrs.length; i < len; i++) {
+            for (i = 0, len = lintErrs.length; i < len; i++) {
                 if (lintErrs[i]) {
                     utils.puts('Line ' + lintErrs[i].line + ' col ' + lintErrs[i].character + ': ' + lintErrs[i].reason);
                 }
             }
             
-            return;
+        }
+              
+        if (unusedVars) {
+            for (i = 0; i < unusedVars.length; i += 1) {
+                utils.puts("Unused variable '" + unusedVars[i].name + "' in function '" + unusedVars[i]['function'] + "' on line " + unusedVars[i].line);
+            }
         }
         
-        return utils.puts('ok');
+        return;
     }
     
     function runLint() {
