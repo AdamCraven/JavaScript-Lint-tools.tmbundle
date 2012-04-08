@@ -1,4 +1,4 @@
-/*jshint*/
+/*jslint plusplus: false*/
 /*global process, require*/
 (function () {
     "use strict";
@@ -75,7 +75,7 @@
             // Matches '/*jslint' or '/*jshint' on firstline
             var firstLine = chunk.match(/^\/\*(js(l|h)int)/);
 
-            if (firstLine && typeof firstLine[1] !== "undefined") {
+            if (firstLine && typeof firstLine[1] !== "undefined" && lintVersion === null) {
                 lintVersion = firstLine[1];  
                 process.stdin.pause();
                 
