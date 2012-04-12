@@ -23,7 +23,7 @@ Or with git via the command line.
 	osascript -e 'tell app "TextMate" to reload bundles'
 
 ## Usage
-To lint a file you **must** add to the **firstline** /\*jslint\*/ or /\*jshint*/, depending on which lint you wish to use.
+To lint a file you must add /\*jslint\*/ or /\*jshint*/ near to the top of the file, depending on which lint you wish to use.
 
 An example of a reasonable and basic setup would be;
 

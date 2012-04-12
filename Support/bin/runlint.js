@@ -1,4 +1,4 @@
-/*jslint plusplus: false*/
+/*jshint plusplus: false*/
 /*global process, require*/
 (function () {
     "use strict";
@@ -72,11 +72,11 @@
     function getLintVersion() {
         
         function checkFirstLine(chunk) {  
-            // Matches '/*jslint' or '/*jshint' on firstline
-            var firstLine = chunk.match(/^\/\*(js(l|h)int)/);
+            // Matches 'jslint' or 'jshint' in first chunk of file.
+            var lintVersionInFile = chunk.match(/^(?:[\s\S]+)?\/\*(js(l|h)int)/);
 
-            if (firstLine && typeof firstLine[1] !== "undefined" && lintVersion === null) {
-                lintVersion = firstLine[1];  
+            if (lintVersionInFile && typeof lintVersionInFile[1] !== "undefined" && lintVersion === null) {
+                lintVersion = lintVersionInFile[1];  
                 process.stdin.pause();
                 
                 return runLint();
