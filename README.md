@@ -18,6 +18,7 @@ Easy configuration, fast (even with multi-thousand line files) and lint on every
 
 Or with git via the command line.
 
+	mkdir -p ~/Library/Application\ Support/TextMate/Bundles/
 	cd ~/Library/Application\ Support/TextMate/Bundles/
 	git clone https://github.com/AdmCrvn/JavaScript-Lint-tools.tmbundle JavaScript-Lint-tools.tmbundle
 	osascript -e 'tell app "TextMate" to reload bundles'
